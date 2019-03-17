@@ -1,0 +1,8 @@
+# The property configuration contains values used by the plugin for calculations or other actions.
+# These are constance values that are used as a basis
+
+# The seconds a player needs to wait before picking another player/entity up again
+player-pickup-cooldown: 10
+
+# The multiplier applied when a player launches a picked up entity
+player-throw-multiplier: 1

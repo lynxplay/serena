@@ -1,0 +1,44 @@
+name: Serena
+main: me.ravvenlord.serena.Serena
+version: 1.0
+
+commands:
+  serena:
+    description: 'Toggles the state of serena'
+    usage: '/serena'
+    permission: 'serena.toggle'
+  serena-reload:
+    description: 'Reloads the serena plugin'
+    usage: '/serena-reload'
+    permission: 'serena.reload'
+
+permissions:
+
+  # The basic atomic permissions
+  serena.toggle:
+    description: 'This permissions allows a player to toggle other players abilities to pick him up'
+  serena.reload:
+    description: 'This permission allows a player to reload the Serena plugin'
+  serena.pickup.player:
+    description: 'This permission allows a player to pick up other players'
+  serena.pickup.entity:
+    description: 'This permission allows a player to pick up entities other than players'
+  serena.pickup.bypass:
+    description: 'This permission allows a player to bypass a players toggle'
+
+  # The permission groups
+  serena.user:
+    description: 'The normal permission for users'
+    default: true
+    children:
+      - 'serena.toggle'
+      - 'serena.pickup.player'
+  serena.*:
+    description: 'Grants full access to serena'
+    default: op
+    children:
+      - 'serena.user'
+      - 'serena.pickup.entity'
+      - 'serena.pickup.bypass'
+      - 'serena.reload'
+
