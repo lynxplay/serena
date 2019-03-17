@@ -18,4 +18,4 @@ permission-missing: '&cYou do not have the permission to perform this action'
 reload-complete: '&2Reload completed'
 
 # player-cannot-be-picked-up is the string send if a player has pick up disabled
-player-cannot-be-picked-up: '&cThis player disabled the ability to be picked up'
+player-cannot-be-picked-up: '&4%s&c cannot be picked up'
