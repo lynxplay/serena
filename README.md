@@ -7,7 +7,7 @@ Installation
 
 The plugin is based on the maven build tools, so you can easily install it using  
 ```bash
-mvn install
+gradle build
 ```
 The final output jar will be located in the `target` folder.
 
