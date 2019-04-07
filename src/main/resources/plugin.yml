@@ -1,6 +1,6 @@
 name: Serena
 main: me.ravvenlord.serena.Serena
-version: 1.0
+version: "1.0"
 
 commands:
   serena:

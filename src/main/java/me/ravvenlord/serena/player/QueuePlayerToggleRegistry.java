@@ -6,12 +6,13 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class QueuePlayerToggleRegistry implements PlayerToggleRegistry {
 
-    private Queue<UUID> playerQueue = new ConcurrentLinkedQueue<>();
+    private final Queue<UUID> playerQueue = new ConcurrentLinkedQueue<>();
 
     /**
      * Returns the current toggle value, being {@code true} if the toggle is enabled, else {@code false}
      *
      * @param uuid the uuid to check against
+     *
      * @return the toggle value
      */
     @Override
@@ -24,6 +25,7 @@ public class QueuePlayerToggleRegistry implements PlayerToggleRegistry {
      *
      * @param uuid the uuid to update
      * @param value the new value for the given uuid
+     *
      * @return the previous value
      */
     @Override

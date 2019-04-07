@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerConnectionListener implements Listener {
 
-    private CooldownContainer cooldownContainer;
+    private final CooldownContainer cooldownContainer;
 
     public PlayerConnectionListener(CooldownContainer cooldownContainer) {
         this.cooldownContainer = cooldownContainer;

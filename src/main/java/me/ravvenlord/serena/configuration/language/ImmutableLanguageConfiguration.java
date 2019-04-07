@@ -5,15 +5,15 @@ import java.time.temporal.ChronoUnit;
 
 public class ImmutableLanguageConfiguration implements LanguageConfiguration {
 
-    private String prefix;
-    private String playerPickupCooldown;
-    private String pickupDisabled;
-    private String pickupEnabled;
-    private String permissionMissing;
-    private String playerCannotBePickedUp;
-    private String reloadComplete;
+    private final String prefix;
+    private final String playerPickupCooldown;
+    private final String pickupDisabled;
+    private final String pickupEnabled;
+    private final String permissionMissing;
+    private final String playerCannotBePickedUp;
+    private final String reloadComplete;
 
-    public ImmutableLanguageConfiguration(String prefix
+    ImmutableLanguageConfiguration(String prefix
             , String playerPickupCooldown
             , String pickupDisabled
             , String pickupEnabled
@@ -39,10 +39,11 @@ public class ImmutableLanguageConfiguration implements LanguageConfiguration {
     }
 
     /**
-     * Returns the string to display that the pick up was unsuccessful due to the player's pick-up cooldown
-     * still being on cooldown. This cooldown rests on the player that is trying to pick something up.
+     * Returns the string to display that the pick up was unsuccessful due to the player's pick-up cooldown still being
+     * on cooldown. This cooldown rests on the player that is trying to pick something up.
      *
      * @param timeLeft the time left before the entity can be picked up again
+     *
      * @return the message
      */
     @Override
@@ -54,6 +55,7 @@ public class ImmutableLanguageConfiguration implements LanguageConfiguration {
      * Returns the string send when a player cannot be picked up as he toggled it off
      *
      * @param playerName the name of the player who cannot be picked up
+     *
      * @return the player
      */
     @Override

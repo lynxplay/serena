@@ -18,6 +18,7 @@ public interface CooldownContainer {
      * Returns the duration the cooldown for the uuid will last
      *
      * @param uuid the uuid to check for
+     *
      * @return the duration wrapped in an {@link Optional}
      */
     Optional<Duration> getCooldownLeft(UUID uuid);

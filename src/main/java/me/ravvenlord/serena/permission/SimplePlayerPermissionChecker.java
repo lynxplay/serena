@@ -9,6 +9,7 @@ public class SimplePlayerPermissionChecker implements PlayerPermissionChecker {
      * Returns if the permissible instance has the permission to use the serena toggle command
      *
      * @param permissible the permissible instance
+     *
      * @return the result
      */
     @Override
@@ -20,6 +21,7 @@ public class SimplePlayerPermissionChecker implements PlayerPermissionChecker {
      * Returns if the permissible can use the reload command
      *
      * @param permissible the permissible to check against
+     *
      * @return the result
      */
     @Override
@@ -32,6 +34,7 @@ public class SimplePlayerPermissionChecker implements PlayerPermissionChecker {
      *
      * @param permissible the permissible to check against
      * @param entity the entity to pickup
+     *
      * @return the result
      */
     @Override
@@ -44,6 +47,7 @@ public class SimplePlayerPermissionChecker implements PlayerPermissionChecker {
      *
      * @param permissible the permissible to check against
      * @param entity the entity to pickup
+     *
      * @return the result
      */
     @Override
@@ -55,6 +59,7 @@ public class SimplePlayerPermissionChecker implements PlayerPermissionChecker {
      * Returns if the permissible instance can bypass a toggled decision
      *
      * @param permissible the permissible instance
+     *
      * @return the result
      */
     @Override

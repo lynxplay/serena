@@ -18,12 +18,12 @@ import java.util.function.Function;
 
 public class PlayerPickupListener implements Listener {
 
-    private CooldownContainer cooldownContainer;
-    private LanguageConfiguration languageConfiguration;
-    private PlayerToggleRegistry toggleRegistry;
-    private PlayerPermissionChecker permissionChecker;
-    private PropertyConfiguration propertyConfiguration;
-    private Function<Player, String> nameLookup;
+    private final CooldownContainer cooldownContainer;
+    private final LanguageConfiguration languageConfiguration;
+    private final PlayerToggleRegistry toggleRegistry;
+    private final PlayerPermissionChecker permissionChecker;
+    private final PropertyConfiguration propertyConfiguration;
+    private final Function<Player, String> nameLookup;
 
     public PlayerPickupListener(CooldownContainer cooldownContainer
             , LanguageConfiguration languageConfiguration

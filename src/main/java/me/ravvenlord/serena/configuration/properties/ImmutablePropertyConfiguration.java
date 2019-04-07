@@ -4,10 +4,10 @@ import java.time.Duration;
 
 public class ImmutablePropertyConfiguration implements PropertyConfiguration {
 
-    private Duration playerPickupCooldown;
-    private double throwVelocityMultiplier;
+    private final Duration playerPickupCooldown;
+    private final double throwVelocityMultiplier;
 
-    public ImmutablePropertyConfiguration(Duration playerPickupCooldown, double throwVelocityMultiplier) {
+    ImmutablePropertyConfiguration(Duration playerPickupCooldown, double throwVelocityMultiplier) {
         this.playerPickupCooldown = playerPickupCooldown;
         this.throwVelocityMultiplier = throwVelocityMultiplier;
     }

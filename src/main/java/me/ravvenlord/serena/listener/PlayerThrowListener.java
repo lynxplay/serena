@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class PlayerThrowListener implements Listener {
 
-    private PropertyConfiguration propertyConfiguration;
-    private FixedScheduler scheduler;
+    private final PropertyConfiguration propertyConfiguration;
+    private final FixedScheduler scheduler;
 
     public PlayerThrowListener(PropertyConfiguration propertyConfiguration, FixedScheduler scheduler) {
         this.propertyConfiguration = propertyConfiguration;

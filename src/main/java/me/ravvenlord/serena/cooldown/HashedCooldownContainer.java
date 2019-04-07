@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class HashedCooldownContainer implements CooldownContainer {
 
-    private Map<UUID, Instant> cooldownEnd = new ConcurrentHashMap<>();
+    private final Map<UUID, Instant> cooldownEnd = new ConcurrentHashMap<>();
 
     /**
      * Starts a cooldown for the given uuid
@@ -26,6 +26,7 @@ public class HashedCooldownContainer implements CooldownContainer {
      * Returns the duration the cooldown for the uuid will last
      *
      * @param uuid the uuid to check for
+     *
      * @return the duration wrapped in an {@link Optional}
      */
     @Override

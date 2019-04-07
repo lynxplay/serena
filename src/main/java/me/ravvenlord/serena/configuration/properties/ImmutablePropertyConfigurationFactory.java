@@ -11,6 +11,7 @@ public class ImmutablePropertyConfigurationFactory implements ConfigurationFacto
      * Creates the instance of the configuration data object
      *
      * @param configuration the spigot configuration instance to base it on
+     *
      * @return the created instance
      */
     @Override

@@ -43,8 +43,8 @@ public class Serena extends JavaPlugin implements Reloadable {
 
     @Override
     public void onEnable() {
-        this.languageConfigPath = Path.of(getDataFolder().toURI()).resolve("language.yml");
-        this.propertiesConfigPath = Path.of(getDataFolder().toURI()).resolve("properties.yml");
+        this.languageConfigPath = getDataFolder().toPath().resolve("language.yml");
+        this.propertiesConfigPath = getDataFolder().toPath().resolve("properties.yml");
 
         this.languageConfigurationFactory = new ImmutableLanguageConfigurationFactory();
         this.propertyConfigurationFactory = new ImmutablePropertyConfigurationFactory();
@@ -133,11 +133,13 @@ public class Serena extends JavaPlugin implements Reloadable {
      * @param factory the factory to create the data instance from
      * @param filePath the file path of the config
      * @param <T> the type of the data instance
+     *
      * @return the data instance
+     *
      * @throws RuntimeException if the file could not be read
      */
     private <T> T readConfig(ConfigurationFactory<T> factory, String filePath) {
-        try (BufferedReader reader = Files.newBufferedReader(Path.of(getDataFolder().toURI()).resolve(filePath))) {
+        try (BufferedReader reader = Files.newBufferedReader(getDataFolder().toPath().resolve(filePath))) {
             return factory.create(YamlConfiguration.loadConfiguration(reader));
         } catch (IOException e) {
             throw new RuntimeException(String.format("Could not read configuration file %s in plugin data-folder", filePath), e);

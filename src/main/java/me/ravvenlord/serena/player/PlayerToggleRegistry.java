@@ -11,6 +11,7 @@ public interface PlayerToggleRegistry {
      * Returns the current toggle value, being {@code true} if the toggle is enabled, else {@code false}
      *
      * @param uuid the uuid to check against
+     *
      * @return the toggle value
      */
     boolean getCurrentToggle(UUID uuid);
@@ -20,6 +21,7 @@ public interface PlayerToggleRegistry {
      *
      * @param uuid the uuid to update
      * @param value the new value for the given uuid
+     *
      * @return the previous value
      */
     boolean setToggle(UUID uuid, boolean value);
@@ -28,6 +30,7 @@ public interface PlayerToggleRegistry {
      * Toggles the current value of the player, negating the current value
      *
      * @param uuid the uuid to update
+     *
      * @return the new toggle value
      */
     default boolean toggle(UUID uuid) {

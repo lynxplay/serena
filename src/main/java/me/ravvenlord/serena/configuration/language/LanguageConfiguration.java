@@ -15,10 +15,11 @@ public interface LanguageConfiguration {
     String prefix();
 
     /**
-     * Returns the string to display that the pick up was unsuccessful due to the player's pick-up cooldown
-     * still being on cooldown. This cooldown rests on the player that is trying to pick something up.
+     * Returns the string to display that the pick up was unsuccessful due to the player's pick-up cooldown still being
+     * on cooldown. This cooldown rests on the player that is trying to pick something up.
      *
      * @param timeLeft the time left before the entity can be picked up again
+     *
      * @return the message
      */
     String playerPickupCooldown(Duration timeLeft);
@@ -27,6 +28,7 @@ public interface LanguageConfiguration {
      * Returns the string send when a player cannot be picked up as he toggled it off
      *
      * @param playerName the name of the player who cannot be picked up
+     *
      * @return the player
      */
     String playerCannotBePickedUp(String playerName);

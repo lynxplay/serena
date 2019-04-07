@@ -10,9 +10,9 @@ import org.bukkit.entity.Player;
 
 public class SerenaToggleCommand implements CommandExecutor {
 
-    private PlayerToggleRegistry playerToggleRegistry;
-    private LanguageConfiguration languageConfiguration;
-    private PlayerPermissionChecker permissionChecker;
+    private final PlayerToggleRegistry playerToggleRegistry;
+    private final LanguageConfiguration languageConfiguration;
+    private final PlayerPermissionChecker permissionChecker;
 
     public SerenaToggleCommand(PlayerToggleRegistry playerToggleRegistry
             , LanguageConfiguration languageConfiguration
@@ -25,13 +25,14 @@ public class SerenaToggleCommand implements CommandExecutor {
     /**
      * Executes the given command, returning its success.
      * <br>
-     * If false is returned, then the "usage" plugin.yml entry for this command
-     * (if defined) will be sent to the player.
+     * If false is returned, then the "usage" plugin.yml entry for this command (if defined) will be sent to the
+     * player.
      *
      * @param sender Source of the command
      * @param command Command which was executed
      * @param label Alias of the command which was used
      * @param args Passed command arguments
+     *
      * @return true if a valid command, otherwise false
      */
     @Override
