@@ -1,6 +1,7 @@
 name: Serena
 main: me.ravvenlord.serena.Serena
 version: "1.0"
+api-version: "1.13"
 
 commands:
   serena:
