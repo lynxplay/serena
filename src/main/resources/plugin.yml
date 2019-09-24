@@ -31,14 +31,14 @@ permissions:
     description: 'The normal permission for users'
     default: true
     children:
-      - 'serena.toggle'
-      - 'serena.pickup.player'
+      serena.toggle: true
+      serena.pickup.player: true
   serena.*:
     description: 'Grants full access to serena'
     default: op
     children:
-      - 'serena.user'
-      - 'serena.pickup.entity'
-      - 'serena.pickup.bypass'
-      - 'serena.reload'
+      serena.user: true
+      serena.pickup.entity: true
+      serena.pickup.bypass: true
+      serena.reload: true
 
