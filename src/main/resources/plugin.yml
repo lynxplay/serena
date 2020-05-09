@@ -1,5 +1,5 @@
 name: Serena
-main: me.ravvenlord.serena.Serena
+main: dev.lynxplay.serena.Serena
 version: "${project.version}"
 api-version: "1.15"
 
