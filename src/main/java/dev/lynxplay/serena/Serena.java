@@ -2,6 +2,11 @@ package dev.lynxplay.serena;
 
 import dev.lynxplay.serena.commands.SerenaReloadCommand;
 import dev.lynxplay.serena.commands.SerenaToggleCommand;
+import dev.lynxplay.serena.configuration.ConfigurationFactory;
+import dev.lynxplay.serena.configuration.language.ImmutableLanguageConfigurationFactory;
+import dev.lynxplay.serena.configuration.language.LanguageConfiguration;
+import dev.lynxplay.serena.configuration.properties.ImmutablePropertyConfigurationFactory;
+import dev.lynxplay.serena.configuration.properties.PropertyConfiguration;
 import dev.lynxplay.serena.cooldown.CooldownContainer;
 import dev.lynxplay.serena.cooldown.HashedCooldownContainer;
 import dev.lynxplay.serena.listener.PlayerConnectionListener;
@@ -9,13 +14,10 @@ import dev.lynxplay.serena.listener.PlayerPickupListener;
 import dev.lynxplay.serena.listener.PlayerThrowListener;
 import dev.lynxplay.serena.permission.PlayerPermissionChecker;
 import dev.lynxplay.serena.permission.SimplePlayerPermissionChecker;
+import dev.lynxplay.serena.player.PersistentPlayerToggleRegister;
 import dev.lynxplay.serena.player.PlayerToggleRegistry;
-import dev.lynxplay.serena.player.QueuePlayerToggleRegistry;
-import dev.lynxplay.serena.configuration.ConfigurationFactory;
-import dev.lynxplay.serena.configuration.language.ImmutableLanguageConfigurationFactory;
-import dev.lynxplay.serena.configuration.language.LanguageConfiguration;
-import dev.lynxplay.serena.configuration.properties.ImmutablePropertyConfigurationFactory;
-import dev.lynxplay.serena.configuration.properties.PropertyConfiguration;
+import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
@@ -51,7 +53,7 @@ public class Serena extends JavaPlugin implements Reloadable {
 
         this.cooldownContainer = new HashedCooldownContainer();
         this.playerPermissionChecker = new SimplePlayerPermissionChecker();
-        this.playerToggleRegistry = new QueuePlayerToggleRegistry();
+        this.playerToggleRegistry = new PersistentPlayerToggleRegister(Bukkit::getPlayer, new NamespacedKey(this, "ToggleValue"));
 
         this.fixedScheduler = (r, l) -> getServer().getScheduler().runTaskLater(this, r, l);
 
