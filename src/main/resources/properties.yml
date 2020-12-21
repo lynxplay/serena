@@ -6,3 +6,9 @@ player-pickup-cooldown: 10
 
 # The multiplier applied when a player launches a picked up entity
 player-throw-multiplier: 1
+
+# A list of minecraft entity types that may not be interacted with through serena
+# The full list of minecraft entity types is available here:
+# https://minecraft.gamepedia.com/Java_Edition_data_value/Pre-flattening/Entity_IDs
+banned-entity-types:
+  - 'armor_stand'
