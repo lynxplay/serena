@@ -53,7 +53,8 @@ public class Serena extends JavaPlugin implements Reloadable {
 
         this.cooldownContainer = new HashedCooldownContainer();
         this.playerPermissionChecker = new SimplePlayerPermissionChecker();
-        this.playerToggleRegistry = new PersistentPlayerToggleRegister(Bukkit::getPlayer, new NamespacedKey(this, "ToggleValue"));
+        this.playerToggleRegistry = new PersistentPlayerToggleRegister(Bukkit::getPlayer, new NamespacedKey(this,
+            "ToggleValue"));
 
         this.fixedScheduler = (r, l) -> getServer().getScheduler().runTaskLater(this, r, l);
 
@@ -67,11 +68,12 @@ public class Serena extends JavaPlugin implements Reloadable {
         LanguageConfiguration languageConfiguration = readConfig(languageConfigurationFactory, "language.yml");
         PropertyConfiguration propertyConfiguration = readConfig(propertyConfigurationFactory, "properties.yml");
 
-        getLogger().info(String.format("player-pickup-cooldown %d seconds", propertyConfiguration.playerPickupCooldown().getSeconds()));
+        getLogger().info(String.format("player-pickup-cooldown %d seconds",
+            propertyConfiguration.playerPickupCooldown().getSeconds()));
 
         HandlerList.unregisterAll(this);
         registerListeners(this.cooldownContainer, languageConfiguration, this.playerToggleRegistry
-                , this.playerPermissionChecker, propertyConfiguration, fixedScheduler);
+            , this.playerPermissionChecker, propertyConfiguration, fixedScheduler);
 
         registerCommands(this.playerToggleRegistry, languageConfiguration, this.playerPermissionChecker);
     }
@@ -79,46 +81,47 @@ public class Serena extends JavaPlugin implements Reloadable {
     /**
      * Registers the listeners this plugin uses
      *
-     * @param cooldownContainer the cooldown container to pass
+     * @param cooldownContainer     the cooldown container to pass
      * @param languageConfiguration the languageConfiguration to use
-     * @param toggleRegistry the toggle registry to use
-     * @param permissionChecker the permission checker to use
+     * @param toggleRegistry        the toggle registry to use
+     * @param permissionChecker     the permission checker to use
      * @param propertyConfiguration the propertyConfiguration to use
      */
     private void registerListeners(CooldownContainer cooldownContainer
-            , LanguageConfiguration languageConfiguration
-            , PlayerToggleRegistry toggleRegistry
-            , PlayerPermissionChecker permissionChecker
-            , PropertyConfiguration propertyConfiguration
-            , FixedScheduler scheduler) {
+        , LanguageConfiguration languageConfiguration
+        , PlayerToggleRegistry toggleRegistry
+        , PlayerPermissionChecker permissionChecker
+        , PropertyConfiguration propertyConfiguration
+        , FixedScheduler scheduler) {
 
         this.getServer().getPluginManager().registerEvents(new PlayerPickupListener(cooldownContainer
-                , languageConfiguration
-                , toggleRegistry
-                , permissionChecker
-                , propertyConfiguration
-                , Player::getDisplayName), this);
-        this.getServer().getPluginManager().registerEvents(new PlayerThrowListener(propertyConfiguration, scheduler), this);
+            , languageConfiguration
+            , toggleRegistry
+            , permissionChecker
+            , propertyConfiguration
+            , Player::getDisplayName), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerThrowListener(propertyConfiguration, scheduler),
+            this);
         this.getServer().getPluginManager().registerEvents(new PlayerConnectionListener(cooldownContainer), this);
     }
 
     /**
      * Registers the commands this plugin uses
      *
-     * @param playerToggleRegistry the toggle registry to use
+     * @param playerToggleRegistry  the toggle registry to use
      * @param languageConfiguration the languageConfiguration to use
-     * @param permissionChecker the the permission checker to use
+     * @param permissionChecker     the the permission checker to use
      */
     private void registerCommands(PlayerToggleRegistry playerToggleRegistry
-            , LanguageConfiguration languageConfiguration
-            , PlayerPermissionChecker permissionChecker) {
+        , LanguageConfiguration languageConfiguration
+        , PlayerPermissionChecker permissionChecker) {
 
         Objects.requireNonNull(getCommand("serena")).setExecutor(new SerenaToggleCommand(playerToggleRegistry
-                , languageConfiguration
-                , permissionChecker));
+            , languageConfiguration
+            , permissionChecker));
         Objects.requireNonNull(getCommand("serena-reload")).setExecutor(new SerenaReloadCommand(permissionChecker
-                , languageConfiguration
-                , this));
+            , languageConfiguration
+            , this));
     }
 
     /**
@@ -132,9 +135,9 @@ public class Serena extends JavaPlugin implements Reloadable {
     /**
      * Reads a config from a relative path
      *
-     * @param factory the factory to create the data instance from
+     * @param factory  the factory to create the data instance from
      * @param filePath the file path of the config
-     * @param <T> the type of the data instance
+     * @param <T>      the type of the data instance
      *
      * @return the data instance
      *
@@ -144,7 +147,9 @@ public class Serena extends JavaPlugin implements Reloadable {
         try (BufferedReader reader = Files.newBufferedReader(getDataFolder().toPath().resolve(filePath))) {
             return factory.create(YamlConfiguration.loadConfiguration(reader));
         } catch (IOException e) {
-            throw new RuntimeException(String.format("Could not read configuration file %s in plugin data-folder", filePath), e);
+            throw new RuntimeException(String.format("Could not read configuration file %s in plugin data-folder",
+                filePath), e);
         }
     }
+
 }

@@ -19,7 +19,7 @@ public interface PlayerToggleRegistry {
     /**
      * Sets the toggle value
      *
-     * @param uuid the uuid to update
+     * @param uuid  the uuid to update
      * @param value the new value for the given uuid
      *
      * @return the previous value
@@ -38,4 +38,5 @@ public interface PlayerToggleRegistry {
         this.setToggle(uuid, newValue);
         return newValue;
     }
+
 }

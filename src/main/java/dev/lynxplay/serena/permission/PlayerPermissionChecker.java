@@ -31,7 +31,7 @@ public interface PlayerPermissionChecker {
      * Returns if the player has the permission to pickup the entity
      *
      * @param permissible the permissible to check against
-     * @param entity the entity to pickup
+     * @param entity      the entity to pickup
      *
      * @return the result
      */
@@ -41,7 +41,7 @@ public interface PlayerPermissionChecker {
      * Returns if the player has the permission to pickup the entity
      *
      * @param permissible the permissible to check against
-     * @param entity the entity to pickup
+     * @param entity      the entity to pickup
      *
      * @return the result
      */
@@ -55,4 +55,5 @@ public interface PlayerPermissionChecker {
      * @return the result
      */
     boolean bypassToggle(Permissible permissible);
+
 }

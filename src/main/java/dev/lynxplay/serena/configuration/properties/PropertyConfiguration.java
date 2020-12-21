@@ -20,4 +20,5 @@ public interface PropertyConfiguration {
      * @return the double value
      */
     double throwVelocityMultiplier();
+
 }

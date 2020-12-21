@@ -32,9 +32,10 @@ public class PlayerThrowListener implements Listener {
 
         player.eject();
         scheduler.runTaskDelayed(() -> passengers.forEach(e -> e.setVelocity(player.getLocation()
-                        .getDirection()
-                        .multiply(this.propertyConfiguration.throwVelocityMultiplier())
-                        .add(player.getVelocity())))
-                , 1L);
+                .getDirection()
+                .multiply(this.propertyConfiguration.throwVelocityMultiplier())
+                .add(player.getVelocity())))
+            , 1L);
     }
+
 }
