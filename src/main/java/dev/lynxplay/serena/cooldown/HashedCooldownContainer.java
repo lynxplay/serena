@@ -14,7 +14,7 @@ public class HashedCooldownContainer implements CooldownContainer {
     /**
      * Starts a cooldown for the given uuid
      *
-     * @param uuid the uuid
+     * @param uuid     the uuid
      * @param duration the duration this cooldown will last
      */
     @Override
@@ -33,8 +33,8 @@ public class HashedCooldownContainer implements CooldownContainer {
     public Optional<Duration> getCooldownLeft(UUID uuid) {
         Instant now = Instant.now();
         return Optional.ofNullable(this.cooldownEnd.get(uuid))
-                .filter(i -> i.isAfter(now))
-                .map(i -> Duration.between(now, i));
+            .filter(i -> i.isAfter(now))
+            .map(i -> Duration.between(now, i));
     }
 
     /**
@@ -46,4 +46,5 @@ public class HashedCooldownContainer implements CooldownContainer {
     public void remove(UUID uuid) {
         this.cooldownEnd.remove(uuid);
     }
+
 }

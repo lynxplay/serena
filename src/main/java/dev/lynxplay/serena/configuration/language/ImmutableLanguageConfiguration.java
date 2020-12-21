@@ -14,11 +14,11 @@ public class ImmutableLanguageConfiguration implements LanguageConfiguration {
     private final String reloadComplete;
 
     ImmutableLanguageConfiguration(String prefix
-            , String playerPickupCooldown
-            , String pickupDisabled
-            , String pickupEnabled
-            , String permissionMissing
-            , String playerCannotBePickedUp, String reloadComplete) {
+        , String playerPickupCooldown
+        , String pickupDisabled
+        , String pickupEnabled
+        , String permissionMissing
+        , String playerCannotBePickedUp, String reloadComplete) {
         this.prefix = prefix;
         this.playerPickupCooldown = playerPickupCooldown;
         this.pickupDisabled = pickupDisabled;
@@ -102,4 +102,5 @@ public class ImmutableLanguageConfiguration implements LanguageConfiguration {
     public String reloadComplete() {
         return prefix() + this.reloadComplete;
     }
+
 }

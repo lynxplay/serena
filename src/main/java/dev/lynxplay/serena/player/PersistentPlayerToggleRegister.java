@@ -28,16 +28,17 @@ public class PersistentPlayerToggleRegister implements PlayerToggleRegistry {
      * Returns the current toggle value, being {@code true} if the toggle is enabled, else {@code false}
      *
      * @param uuid the uuid to check against
+     *
      * @return the toggle value
      */
     @Override
     public boolean getCurrentToggle(UUID uuid) {
         return Optional.of(uuid)
-                .map(this.playerLookup)
-                .map(PersistentDataHolder::getPersistentDataContainer)
-                .map(c -> c.get(this.toggleNamespace, PersistentDataType.BYTE))
-                .map(b -> b == 1)
-                .orElse(false);
+            .map(this.playerLookup)
+            .map(PersistentDataHolder::getPersistentDataContainer)
+            .map(c -> c.get(this.toggleNamespace, PersistentDataType.BYTE))
+            .map(b -> b == 1)
+            .orElse(false);
     }
 
     /**
@@ -45,21 +46,23 @@ public class PersistentPlayerToggleRegister implements PlayerToggleRegistry {
      *
      * @param uuid  the uuid to update
      * @param value the new value for the given uuid
+     *
      * @return the previous value
      */
     @Override
     public boolean setToggle(UUID uuid, boolean value) {
         return Optional.of(uuid)
-                .map(this.playerLookup)
-                .map(PersistentDataHolder::getPersistentDataContainer)
-                .map(c -> {
-                    final boolean previousValue = Optional.ofNullable(c.get(this.toggleNamespace, PersistentDataType.BYTE))
-                            .map(b -> b == 1)
-                            .orElse(false);
+            .map(this.playerLookup)
+            .map(PersistentDataHolder::getPersistentDataContainer)
+            .map(c -> {
+                final boolean previousValue = Optional.ofNullable(c.get(this.toggleNamespace, PersistentDataType.BYTE))
+                    .map(b -> b == 1)
+                    .orElse(false);
 
-                    c.set(this.toggleNamespace, PersistentDataType.BYTE, (byte) (value ? 1 : 0));
-                    return previousValue;
-                })
-                .orElse(false);
+                c.set(this.toggleNamespace, PersistentDataType.BYTE, (byte) (value ? 1 : 0));
+                return previousValue;
+            })
+            .orElse(false);
     }
+
 }

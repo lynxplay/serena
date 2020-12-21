@@ -1,8 +1,8 @@
 package dev.lynxplay.serena.commands;
 
-import dev.lynxplay.serena.permission.PlayerPermissionChecker;
 import dev.lynxplay.serena.Reloadable;
 import dev.lynxplay.serena.configuration.language.LanguageConfiguration;
+import dev.lynxplay.serena.permission.PlayerPermissionChecker;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,7 +14,8 @@ public class SerenaReloadCommand implements CommandExecutor {
     private final LanguageConfiguration languageConfiguration;
     private final Reloadable reloadable;
 
-    public SerenaReloadCommand(PlayerPermissionChecker permissionChecker, LanguageConfiguration languageConfiguration, Reloadable reloadable) {
+    public SerenaReloadCommand(PlayerPermissionChecker permissionChecker, LanguageConfiguration languageConfiguration
+        , Reloadable reloadable) {
         this.permissionChecker = permissionChecker;
         this.languageConfiguration = languageConfiguration;
         this.reloadable = reloadable;
@@ -26,10 +27,10 @@ public class SerenaReloadCommand implements CommandExecutor {
      * If false is returned, then the "usage" plugin.yml entry for this command (if defined) will be sent to the
      * player.
      *
-     * @param sender Source of the command
+     * @param sender  Source of the command
      * @param command Command which was executed
-     * @param label Alias of the command which was used
-     * @param args Passed command arguments
+     * @param label   Alias of the command which was used
+     * @param args    Passed command arguments
      *
      * @return true if a valid command, otherwise false
      */
@@ -50,4 +51,5 @@ public class SerenaReloadCommand implements CommandExecutor {
         player.sendMessage(this.languageConfiguration.reloadComplete());
         return true;
     }
+
 }

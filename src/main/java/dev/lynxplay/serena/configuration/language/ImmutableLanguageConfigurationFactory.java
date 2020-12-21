@@ -22,13 +22,13 @@ public class ImmutableLanguageConfigurationFactory implements ConfigurationFacto
     @Override
     public LanguageConfiguration create(Configuration configuration) {
         return new ImmutableLanguageConfiguration(
-                ensurePostWhitespace(colour(getString(configuration, "prefix")))
-                , ensureOctal(colour(getString(configuration, "player-pickup-cooldown")))
-                , colour(getString(configuration, "pickup-disabled"))
-                , colour(getString(configuration, "pickup-enabled"))
-                , colour(getString(configuration, "permission-missing"))
-                , ensureString(colour(getString(configuration, "player-cannot-be-picked-up")))
-                , colour(getString(configuration, "reload-complete")));
+            ensurePostWhitespace(colour(getString(configuration, "prefix")))
+            , ensureOctal(colour(getString(configuration, "player-pickup-cooldown")))
+            , colour(getString(configuration, "pickup-disabled"))
+            , colour(getString(configuration, "pickup-enabled"))
+            , colour(getString(configuration, "permission-missing"))
+            , ensureString(colour(getString(configuration, "player-cannot-be-picked-up")))
+            , colour(getString(configuration, "reload-complete")));
     }
 
     /**
@@ -80,8 +80,8 @@ public class ImmutableLanguageConfigurationFactory implements ConfigurationFacto
      * pattern failed
      *
      * @param pattern the pattern to check with
-     * @param string the string to check against
-     * @param fix the fix string to appand
+     * @param string  the string to check against
+     * @param fix     the fix string to appand
      *
      * @return the ensured string
      */
@@ -93,11 +93,12 @@ public class ImmutableLanguageConfigurationFactory implements ConfigurationFacto
      * Returns the string found in the config or a very basic default message based on the path
      *
      * @param configuration the configuration to read from
-     * @param path the path to lookup
+     * @param path          the path to lookup
      *
      * @return the string
      */
     private String getString(Configuration configuration, String path) {
         return configuration.getString(path, "{" + path + "}");
     }
+
 }

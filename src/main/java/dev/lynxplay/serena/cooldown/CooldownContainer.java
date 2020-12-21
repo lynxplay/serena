@@ -9,7 +9,7 @@ public interface CooldownContainer {
     /**
      * Starts a cooldown for the given uuid
      *
-     * @param uuid the uuid
+     * @param uuid     the uuid
      * @param duration the duration this cooldown will last
      */
     void startCooldown(UUID uuid, Duration duration);
@@ -29,4 +29,5 @@ public interface CooldownContainer {
      * @param uuid the uuid
      */
     void remove(UUID uuid);
+
 }
