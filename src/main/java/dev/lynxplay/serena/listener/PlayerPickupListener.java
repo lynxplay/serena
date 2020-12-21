@@ -48,6 +48,7 @@ public class PlayerPickupListener implements Listener {
 
         Entity target = event.getRightClicked();
         if (!(target instanceof LivingEntity)) return;
+        if (this.propertyConfiguration.bannedEntityTypes().contains(target.getType())) return;
 
         Duration durationLeft = this.cooldownContainer.getCooldownLeft(player.getUniqueId()).orElse(null);
         if (durationLeft != null) {
