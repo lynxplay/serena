@@ -8,7 +8,7 @@ public interface FixedScheduler {
     /**
      * Runs the task after x spigot ticks
      *
-     * @param task the task to execute
+     * @param task  the task to execute
      * @param delay the delay in ticks
      */
     void runTaskDelayed(Runnable task, long delay);

@@ -60,4 +60,5 @@ public interface LanguageConfiguration {
      * @return the message
      */
     String reloadComplete();
+
 }

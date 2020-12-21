@@ -7,6 +7,7 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
 public class ImmutablePropertyConfigurationFactory implements ConfigurationFactory<PropertyConfiguration> {
+
     /**
      * Creates the instance of the configuration data object
      *
@@ -17,8 +18,9 @@ public class ImmutablePropertyConfigurationFactory implements ConfigurationFacto
     @Override
     public PropertyConfiguration create(Configuration configuration) {
         return new ImmutablePropertyConfiguration(
-                Duration.of(configuration.getLong("player-pickup-cooldown", 10L), ChronoUnit.SECONDS),
-                configuration.getDouble("player-throw-multiplier", 1)
+            Duration.of(configuration.getLong("player-pickup-cooldown", 10L), ChronoUnit.SECONDS),
+            configuration.getDouble("player-throw-multiplier", 1)
         );
     }
+
 }

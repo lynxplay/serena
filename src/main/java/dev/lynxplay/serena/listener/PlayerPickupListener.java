@@ -26,11 +26,11 @@ public class PlayerPickupListener implements Listener {
     private final Function<Player, String> nameLookup;
 
     public PlayerPickupListener(CooldownContainer cooldownContainer
-            , LanguageConfiguration languageConfiguration
-            , PlayerToggleRegistry toggleRegistry
-            , PlayerPermissionChecker permissionChecker
-            , PropertyConfiguration propertyConfiguration
-            , Function<Player, String> nameLookup) {
+        , LanguageConfiguration languageConfiguration
+        , PlayerToggleRegistry toggleRegistry
+        , PlayerPermissionChecker permissionChecker
+        , PropertyConfiguration propertyConfiguration
+        , Function<Player, String> nameLookup) {
         this.cooldownContainer = cooldownContainer;
         this.languageConfiguration = languageConfiguration;
         this.toggleRegistry = toggleRegistry;
@@ -68,7 +68,7 @@ public class PlayerPickupListener implements Listener {
             }
 
             if (!this.toggleRegistry.getCurrentToggle(target.getUniqueId())
-                    && !this.permissionChecker.bypassToggle(player)) {
+                && !this.permissionChecker.bypassToggle(player)) {
                 player.sendMessage(this.languageConfiguration.playerCannotBePickedUp(this.nameLookup.apply(targetPlayer)));
                 return;
             }

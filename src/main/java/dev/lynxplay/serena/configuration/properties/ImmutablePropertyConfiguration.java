@@ -31,4 +31,5 @@ public class ImmutablePropertyConfiguration implements PropertyConfiguration {
     public double throwVelocityMultiplier() {
         return throwVelocityMultiplier;
     }
+
 }

@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permissible;
 
 public class SimplePlayerPermissionChecker implements PlayerPermissionChecker {
+
     /**
      * Returns if the permissible instance has the permission to use the serena toggle command
      *
@@ -33,7 +34,7 @@ public class SimplePlayerPermissionChecker implements PlayerPermissionChecker {
      * Returns if the player has the permission to pickup the entity
      *
      * @param permissible the permissible to check against
-     * @param entity the entity to pickup
+     * @param entity      the entity to pickup
      *
      * @return the result
      */
@@ -46,7 +47,7 @@ public class SimplePlayerPermissionChecker implements PlayerPermissionChecker {
      * Returns if the player has the permission to pickup the entity
      *
      * @param permissible the permissible to check against
-     * @param entity the entity to pickup
+     * @param entity      the entity to pickup
      *
      * @return the result
      */
@@ -66,4 +67,5 @@ public class SimplePlayerPermissionChecker implements PlayerPermissionChecker {
     public boolean bypassToggle(Permissible permissible) {
         return permissible.hasPermission("serena.pickup.bypass");
     }
+
 }
