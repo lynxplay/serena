@@ -14,7 +14,7 @@ public class SimplePlayerPermissionChecker implements PlayerPermissionChecker {
      * @return the result
      */
     @Override
-    public boolean useSerenaToggleCommand(Permissible permissible) {
+    public boolean useSerenaToggleCommand(final Permissible permissible) {
         return permissible.hasPermission("serena.toggle");
     }
 
@@ -26,7 +26,7 @@ public class SimplePlayerPermissionChecker implements PlayerPermissionChecker {
      * @return the result
      */
     @Override
-    public boolean useSerenaReloadCommand(Permissible permissible) {
+    public boolean useSerenaReloadCommand(final Permissible permissible) {
         return permissible.hasPermission("serena.reload");
     }
 
@@ -39,7 +39,7 @@ public class SimplePlayerPermissionChecker implements PlayerPermissionChecker {
      * @return the result
      */
     @Override
-    public boolean pickupEntity(Permissible permissible, Entity entity) {
+    public boolean pickupEntity(final Permissible permissible, final Entity entity) {
         return permissible.hasPermission("serena.pickup.entity");
     }
 
@@ -52,7 +52,7 @@ public class SimplePlayerPermissionChecker implements PlayerPermissionChecker {
      * @return the result
      */
     @Override
-    public boolean pickupPlayer(Permissible permissible, Player entity) {
+    public boolean pickupPlayer(final Permissible permissible, final Player entity) {
         return permissible.hasPermission("serena.pickup.player");
     }
 
@@ -64,7 +64,7 @@ public class SimplePlayerPermissionChecker implements PlayerPermissionChecker {
      * @return the result
      */
     @Override
-    public boolean bypassToggle(Permissible permissible) {
+    public boolean bypassToggle(final Permissible permissible) {
         return permissible.hasPermission("serena.pickup.bypass");
     }
 

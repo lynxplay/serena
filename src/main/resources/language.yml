@@ -1,21 +1,21 @@
 # The prefix is prefixed onto every message send by the plugin
-prefix: '&a[&2Serena&a]'
+prefix: '<green>[<dark_green>Serena<green>] '
 
 # player-pickup-cooldown is the message displayed when a player tries to pickup an entity but still has his own cooldown
 # on picking up entities
-player-pickup-cooldown: '&cYou cannot pick up entities for another &4%d&c seconds'
+player-pickup-cooldown: '<red>You cannot pick up entities for another <dark_red><duration><red> seconds'
 
 # pickup-disabled is the string send when a player manually disables other players from picking him up
-pickup-disabled: '&7You no longer allow other players to &4to pick you up'
+pickup-disabled: '<gray>You no longer allow other players to <dark_red>to pick you up'
 
 # pickup-enabled is the string send when a player manually enables other players to pick him up
-pickup-enabled: '&7You now allow other players to &2to pick you up'
+pickup-enabled: '<gray>You now allow other players to <dark_green>to pick you up'
 
 # permission-missing is the string send when a player performs an action that he does not have the permission for
-permission-missing: '&cYou do not have the permission to perform this action'
+permission-missing: '<red>You do not have the permission to perform this action'
 
 # reload-complete is the string send when the plugin has been reloaded
-reload-complete: '&2Reload completed'
+reload-complete: '<dark_green>Reload completed'
 
 # player-cannot-be-picked-up is the string send if a player has pick up disabled
-player-cannot-be-picked-up: '&4%s&c cannot be picked up'
+player-cannot-be-picked-up: '<dark_red><player><red> cannot be picked up'

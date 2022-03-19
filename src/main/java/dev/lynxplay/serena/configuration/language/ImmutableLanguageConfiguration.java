@@ -1,32 +1,19 @@
 package dev.lynxplay.serena.configuration.language;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
+
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 
-public class ImmutableLanguageConfiguration implements LanguageConfiguration {
-
-    private final String prefix;
-    private final String playerPickupCooldown;
-    private final String pickupDisabled;
-    private final String pickupEnabled;
-    private final String permissionMissing;
-    private final String playerCannotBePickedUp;
-    private final String reloadComplete;
-
-    ImmutableLanguageConfiguration(String prefix
-        , String playerPickupCooldown
-        , String pickupDisabled
-        , String pickupEnabled
-        , String permissionMissing
-        , String playerCannotBePickedUp, String reloadComplete) {
-        this.prefix = prefix;
-        this.playerPickupCooldown = playerPickupCooldown;
-        this.pickupDisabled = pickupDisabled;
-        this.pickupEnabled = pickupEnabled;
-        this.permissionMissing = permissionMissing;
-        this.playerCannotBePickedUp = playerCannotBePickedUp;
-        this.reloadComplete = reloadComplete;
-    }
+public record ImmutableLanguageConfiguration(Component prefix,
+                                             String playerPickupCooldown,
+                                             Component pickupDisabled,
+                                             Component pickupEnabled,
+                                             Component permissionMissing,
+                                             String playerCannotBePickedUp,
+                                             Component reloadComplete) implements LanguageConfiguration {
 
     /**
      * Returns the raw plugin prefix
@@ -34,7 +21,7 @@ public class ImmutableLanguageConfiguration implements LanguageConfiguration {
      * @return the prefix configured in the language pack
      */
     @Override
-    public String prefix() {
+    public Component prefix() {
         return this.prefix;
     }
 
@@ -47,8 +34,12 @@ public class ImmutableLanguageConfiguration implements LanguageConfiguration {
      * @return the message
      */
     @Override
-    public String playerPickupCooldown(Duration timeLeft) {
-        return prefix() + String.format(this.playerPickupCooldown, timeLeft.get(ChronoUnit.SECONDS));
+    public Component playerPickupCooldown(final Duration timeLeft) {
+        return prefix().append(
+            MiniMessage.miniMessage().deserialize(this.playerPickupCooldown, TagResolver.resolver(
+                Placeholder.component("duration", Component.text(timeLeft.getSeconds()))
+            ))
+        );
     }
 
     /**
@@ -59,8 +50,12 @@ public class ImmutableLanguageConfiguration implements LanguageConfiguration {
      * @return the player
      */
     @Override
-    public String playerCannotBePickedUp(String playerName) {
-        return prefix() + String.format(this.playerCannotBePickedUp, playerName);
+    public Component playerCannotBePickedUp(final Component playerName) {
+        return prefix().append(
+            MiniMessage.miniMessage().deserialize(this.playerCannotBePickedUp, TagResolver.resolver(
+                Placeholder.component("player", playerName)
+            ))
+        );
     }
 
     /**
@@ -69,8 +64,8 @@ public class ImmutableLanguageConfiguration implements LanguageConfiguration {
      * @return the message
      */
     @Override
-    public String pickupDisabled() {
-        return prefix() + this.pickupDisabled;
+    public Component pickupDisabled() {
+        return prefix().append(this.pickupDisabled);
     }
 
     /**
@@ -79,8 +74,8 @@ public class ImmutableLanguageConfiguration implements LanguageConfiguration {
      * @return the message send
      */
     @Override
-    public String pickupEnabled() {
-        return prefix() + this.pickupEnabled;
+    public Component pickupEnabled() {
+        return prefix().append(this.pickupEnabled);
     }
 
     /**
@@ -89,8 +84,8 @@ public class ImmutableLanguageConfiguration implements LanguageConfiguration {
      * @return the message
      */
     @Override
-    public String permissionMissing() {
-        return prefix() + this.permissionMissing;
+    public Component permissionMissing() {
+        return prefix().append(this.permissionMissing);
     }
 
     /**
@@ -99,8 +94,8 @@ public class ImmutableLanguageConfiguration implements LanguageConfiguration {
      * @return the message
      */
     @Override
-    public String reloadComplete() {
-        return prefix() + this.reloadComplete;
+    public Component reloadComplete() {
+        return prefix().append(this.reloadComplete);
     }
 
 }

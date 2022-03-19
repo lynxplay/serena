@@ -65,8 +65,8 @@ public class Serena extends JavaPlugin implements Reloadable {
     public void reload() {
         exportConfiguration();
 
-        LanguageConfiguration languageConfiguration = readConfig(languageConfigurationFactory, "language.yml");
-        PropertyConfiguration propertyConfiguration = readConfig(propertyConfigurationFactory, "properties.yml");
+        final LanguageConfiguration languageConfiguration = readConfig(languageConfigurationFactory, "language.yml");
+        final PropertyConfiguration propertyConfiguration = readConfig(propertyConfigurationFactory, "properties.yml");
 
         getLogger().info(String.format("player-pickup-cooldown %d seconds",
             propertyConfiguration.playerPickupCooldown().getSeconds()));
@@ -87,19 +87,21 @@ public class Serena extends JavaPlugin implements Reloadable {
      * @param permissionChecker     the permission checker to use
      * @param propertyConfiguration the propertyConfiguration to use
      */
-    private void registerListeners(CooldownContainer cooldownContainer
-        , LanguageConfiguration languageConfiguration
-        , PlayerToggleRegistry toggleRegistry
-        , PlayerPermissionChecker permissionChecker
-        , PropertyConfiguration propertyConfiguration
-        , FixedScheduler scheduler) {
+    private void registerListeners(final CooldownContainer cooldownContainer,
+                                   final LanguageConfiguration languageConfiguration,
+                                   final PlayerToggleRegistry toggleRegistry,
+                                   final PlayerPermissionChecker permissionChecker,
+                                   final PropertyConfiguration propertyConfiguration,
+                                   final FixedScheduler scheduler) {
 
-        this.getServer().getPluginManager().registerEvents(new PlayerPickupListener(cooldownContainer
-            , languageConfiguration
-            , toggleRegistry
-            , permissionChecker
-            , propertyConfiguration
-            , Player::getDisplayName), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerPickupListener(
+            cooldownContainer,
+            languageConfiguration,
+            toggleRegistry,
+            permissionChecker,
+            propertyConfiguration,
+            Player::displayName
+        ), this);
         this.getServer().getPluginManager().registerEvents(new PlayerThrowListener(propertyConfiguration, scheduler),
             this);
         this.getServer().getPluginManager().registerEvents(new PlayerConnectionListener(cooldownContainer), this);
@@ -112,9 +114,9 @@ public class Serena extends JavaPlugin implements Reloadable {
      * @param languageConfiguration the languageConfiguration to use
      * @param permissionChecker     the the permission checker to use
      */
-    private void registerCommands(PlayerToggleRegistry playerToggleRegistry
-        , LanguageConfiguration languageConfiguration
-        , PlayerPermissionChecker permissionChecker) {
+    private void registerCommands(final PlayerToggleRegistry playerToggleRegistry,
+                                  final LanguageConfiguration languageConfiguration,
+                                  final PlayerPermissionChecker permissionChecker) {
 
         Objects.requireNonNull(getCommand("serena")).setExecutor(new SerenaToggleCommand(playerToggleRegistry
             , languageConfiguration
@@ -143,10 +145,10 @@ public class Serena extends JavaPlugin implements Reloadable {
      *
      * @throws RuntimeException if the file could not be read
      */
-    private <T> T readConfig(ConfigurationFactory<T> factory, String filePath) {
-        try (BufferedReader reader = Files.newBufferedReader(getDataFolder().toPath().resolve(filePath))) {
+    private <T> T readConfig(final ConfigurationFactory<T> factory, final String filePath) {
+        try (final BufferedReader reader = Files.newBufferedReader(getDataFolder().toPath().resolve(filePath))) {
             return factory.create(YamlConfiguration.loadConfiguration(reader));
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new RuntimeException(String.format("Could not read configuration file %s in plugin data-folder",
                 filePath), e);
         }

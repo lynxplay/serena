@@ -1,16 +1,11 @@
 package dev.lynxplay.serena.configuration.language;
 
 import dev.lynxplay.serena.configuration.ConfigurationFactory;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.configuration.Configuration;
 
-import java.util.regex.Pattern;
-
 public class ImmutableLanguageConfigurationFactory implements ConfigurationFactory<LanguageConfiguration> {
-
-    private static final Pattern INTEGER_FORMAT = Pattern.compile("^.*(%d).*$");
-    private static final Pattern STRING_FORMAT = Pattern.compile("^.*(%s).*$");
-    private static final Pattern POST_WHITESPACE = Pattern.compile("^.* $");
 
     /**
      * Creates the instance of the configuration data object
@@ -20,73 +15,27 @@ public class ImmutableLanguageConfigurationFactory implements ConfigurationFacto
      * @return the created instance
      */
     @Override
-    public LanguageConfiguration create(Configuration configuration) {
+    public LanguageConfiguration create(final Configuration configuration) {
         return new ImmutableLanguageConfiguration(
-            ensurePostWhitespace(colour(getString(configuration, "prefix")))
-            , ensureOctal(colour(getString(configuration, "player-pickup-cooldown")))
-            , colour(getString(configuration, "pickup-disabled"))
-            , colour(getString(configuration, "pickup-enabled"))
-            , colour(getString(configuration, "permission-missing"))
-            , ensureString(colour(getString(configuration, "player-cannot-be-picked-up")))
-            , colour(getString(configuration, "reload-complete")));
+            parse(getString(configuration, "prefix")),
+            getString(configuration, "player-pickup-cooldown"),
+            parse(getString(configuration, "pickup-disabled")),
+            parse(getString(configuration, "pickup-enabled")),
+            parse(getString(configuration, "permission-missing")),
+            getString(configuration, "player-cannot-be-picked-up"),
+            parse(getString(configuration, "reload-complete"))
+        );
     }
 
     /**
-     * Colours the provided string in the minecraft chat colors
+     * Parses a plain component using mini message.
      *
-     * @param string the string to colour
+     * @param string the string base for the component in mm format
      *
-     * @return the converted string
+     * @return the parsed component.
      */
-    private String colour(String string) {
-        return ChatColor.translateAlternateColorCodes('&', string) + ChatColor.RESET;
-    }
-
-    /**
-     * Ensures that the string contains an octal format placeholder
-     *
-     * @param string the string to check
-     *
-     * @return the ensured string
-     */
-    private String ensureOctal(String string) {
-        return ensureRegex(INTEGER_FORMAT, string, ": %o");
-    }
-
-    /**
-     * Ensure whitespace ensures that there is a whitespace at the end of the string
-     *
-     * @param string the string to ensure
-     *
-     * @return the ensured string
-     */
-    private String ensurePostWhitespace(String string) {
-        return ensureRegex(POST_WHITESPACE, string, " ");
-    }
-
-    /**
-     * Ensures that the string contains a string formatter
-     *
-     * @param string the string to ensure
-     *
-     * @return the ensured string
-     */
-    private String ensureString(String string) {
-        return ensureRegex(STRING_FORMAT, string, ": %s");
-    }
-
-    /**
-     * Ensures a string to match the pattern and returns it either unmodified or adds the fix string at the end if the
-     * pattern failed
-     *
-     * @param pattern the pattern to check with
-     * @param string  the string to check against
-     * @param fix     the fix string to appand
-     *
-     * @return the ensured string
-     */
-    private String ensureRegex(Pattern pattern, String string, String fix) {
-        return pattern.matcher(string).matches() ? string : string + fix;
+    private Component parse(final String string) {
+        return MiniMessage.miniMessage().deserialize(string);
     }
 
     /**
@@ -97,7 +46,7 @@ public class ImmutableLanguageConfigurationFactory implements ConfigurationFacto
      *
      * @return the string
      */
-    private String getString(Configuration configuration, String path) {
+    private String getString(final Configuration configuration, final String path) {
         return configuration.getString(path, "{" + path + "}");
     }
 

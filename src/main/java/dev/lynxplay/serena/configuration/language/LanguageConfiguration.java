@@ -1,5 +1,7 @@
 package dev.lynxplay.serena.configuration.language;
 
+import net.kyori.adventure.text.Component;
+
 import java.time.Duration;
 
 /**
@@ -12,53 +14,53 @@ public interface LanguageConfiguration {
      *
      * @return the prefix configured in the language pack
      */
-    String prefix();
+    Component prefix();
 
     /**
-     * Returns the string to display that the pick up was unsuccessful due to the player's pick-up cooldown still being
+     * Returns the component to display that the pick up was unsuccessful due to the player's pick-up cooldown still being
      * on cooldown. This cooldown rests on the player that is trying to pick something up.
      *
      * @param timeLeft the time left before the entity can be picked up again
      *
      * @return the message
      */
-    String playerPickupCooldown(Duration timeLeft);
+    Component playerPickupCooldown(Duration timeLeft);
 
     /**
-     * Returns the string send when a player cannot be picked up as he toggled it off
+     * Returns the component send when a player cannot be picked up as he toggled it off
      *
      * @param playerName the name of the player who cannot be picked up
      *
      * @return the player
      */
-    String playerCannotBePickedUp(String playerName);
+    Component playerCannotBePickedUp(Component playerName);
 
     /**
      * Returns the message send when a player disables the ability to be picked up
      *
      * @return the message
      */
-    String pickupDisabled();
+    Component pickupDisabled();
 
     /**
      * Returns the message send when a player enables the ability to be picked up
      *
      * @return the message send
      */
-    String pickupEnabled();
+    Component pickupEnabled();
 
     /**
      * Returns the message send to a player when he is missing the permission for an interaction with this plugin
      *
      * @return the message
      */
-    String permissionMissing();
+    Component permissionMissing();
 
     /**
      * Returns the message returned when the plugin was reloaded successfully
      *
      * @return the message
      */
-    String reloadComplete();
+    Component reloadComplete();
 
 }

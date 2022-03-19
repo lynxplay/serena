@@ -10,19 +10,13 @@ import java.util.UUID;
 import java.util.function.Function;
 
 /**
- * The persistent player toggle register uses the {@link org.bukkit.persistence.PersistentDataHolder} interface provided
+ * The persistent player toggle register uses the {@link PersistentDataHolder} interface provided
  * by spigot to store the current toggle value for a player.
  */
-public class PersistentPlayerToggleRegister implements PlayerToggleRegistry {
-
-    private final Function<UUID, Player> playerLookup;
-    private final NamespacedKey toggleNamespace;
-
-    public PersistentPlayerToggleRegister(final Function<UUID, Player> playerLookup,
-                                          final NamespacedKey toggleNamespace) {
-        this.playerLookup = playerLookup;
-        this.toggleNamespace = toggleNamespace;
-    }
+public record PersistentPlayerToggleRegister(
+    Function<UUID, Player> playerLookup,
+    NamespacedKey toggleNamespace
+) implements PlayerToggleRegistry {
 
     /**
      * Returns the current toggle value, being {@code true} if the toggle is enabled, else {@code false}
@@ -32,7 +26,7 @@ public class PersistentPlayerToggleRegister implements PlayerToggleRegistry {
      * @return the toggle value
      */
     @Override
-    public boolean getCurrentToggle(UUID uuid) {
+    public boolean getCurrentToggle(final UUID uuid) {
         return Optional.of(uuid)
             .map(this.playerLookup)
             .map(PersistentDataHolder::getPersistentDataContainer)
@@ -46,11 +40,10 @@ public class PersistentPlayerToggleRegister implements PlayerToggleRegistry {
      *
      * @param uuid  the uuid to update
      * @param value the new value for the given uuid
-     *
      * @return the previous value
      */
     @Override
-    public boolean setToggle(UUID uuid, boolean value) {
+    public boolean setToggle(final UUID uuid, final boolean value) {
         return Optional.of(uuid)
             .map(this.playerLookup)
             .map(PersistentDataHolder::getPersistentDataContainer)

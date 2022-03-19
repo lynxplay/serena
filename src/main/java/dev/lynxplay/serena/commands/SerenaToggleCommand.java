@@ -7,20 +7,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-public class SerenaToggleCommand implements CommandExecutor {
-
-    private final PlayerToggleRegistry playerToggleRegistry;
-    private final LanguageConfiguration languageConfiguration;
-    private final PlayerPermissionChecker permissionChecker;
-
-    public SerenaToggleCommand(PlayerToggleRegistry playerToggleRegistry
-        , LanguageConfiguration languageConfiguration
-        , PlayerPermissionChecker permissionChecker) {
-        this.playerToggleRegistry = playerToggleRegistry;
-        this.languageConfiguration = languageConfiguration;
-        this.permissionChecker = permissionChecker;
-    }
+public record SerenaToggleCommand(PlayerToggleRegistry playerToggleRegistry,
+                                  LanguageConfiguration languageConfiguration,
+                                  PlayerPermissionChecker permissionChecker) implements CommandExecutor {
 
     /**
      * Executes the given command, returning its success.
@@ -36,13 +27,15 @@ public class SerenaToggleCommand implements CommandExecutor {
      * @return true if a valid command, otherwise false
      */
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)) {
+    public boolean onCommand(final @NotNull CommandSender sender,
+                             final @NotNull Command command,
+                             final @NotNull String label,
+                             final String[] args) {
+        if (!(sender instanceof final Player player)) {
             sender.sendMessage(this.languageConfiguration.prefix() + "Only players can use this command");
             return true;
         }
 
-        Player player = (Player) sender;
         if (!permissionChecker.useSerenaToggleCommand(player)) {
             player.sendMessage(this.languageConfiguration.permissionMissing());
             return true;

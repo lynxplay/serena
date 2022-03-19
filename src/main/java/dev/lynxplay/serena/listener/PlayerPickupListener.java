@@ -5,6 +5,7 @@ import dev.lynxplay.serena.configuration.properties.PropertyConfiguration;
 import dev.lynxplay.serena.cooldown.CooldownContainer;
 import dev.lynxplay.serena.permission.PlayerPermissionChecker;
 import dev.lynxplay.serena.player.PlayerToggleRegistry;
+import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -16,53 +17,36 @@ import org.bukkit.inventory.EquipmentSlot;
 import java.time.Duration;
 import java.util.function.Function;
 
-public class PlayerPickupListener implements Listener {
-
-    private final CooldownContainer cooldownContainer;
-    private final LanguageConfiguration languageConfiguration;
-    private final PlayerToggleRegistry toggleRegistry;
-    private final PlayerPermissionChecker permissionChecker;
-    private final PropertyConfiguration propertyConfiguration;
-    private final Function<Player, String> nameLookup;
-
-    public PlayerPickupListener(CooldownContainer cooldownContainer
-        , LanguageConfiguration languageConfiguration
-        , PlayerToggleRegistry toggleRegistry
-        , PlayerPermissionChecker permissionChecker
-        , PropertyConfiguration propertyConfiguration
-        , Function<Player, String> nameLookup) {
-        this.cooldownContainer = cooldownContainer;
-        this.languageConfiguration = languageConfiguration;
-        this.toggleRegistry = toggleRegistry;
-        this.permissionChecker = permissionChecker;
-        this.propertyConfiguration = propertyConfiguration;
-        this.nameLookup = nameLookup;
-    }
+public record PlayerPickupListener(CooldownContainer cooldownContainer,
+                                   LanguageConfiguration languageConfiguration,
+                                   PlayerToggleRegistry toggleRegistry,
+                                   PlayerPermissionChecker permissionChecker,
+                                   PropertyConfiguration propertyConfiguration,
+                                   Function<Player, Component> nameLookup) implements Listener {
 
     @EventHandler
-    public void onPickup(PlayerInteractAtEntityEvent event) {
-        Player player = event.getPlayer();
+    public void onPickup(final PlayerInteractAtEntityEvent event) {
+        final Player player = event.getPlayer();
 
         if (!player.isSneaking()) return;
         if (event.getHand() != EquipmentSlot.HAND) return;
 
-        Entity target = event.getRightClicked();
+        final Entity target = event.getRightClicked();
         if (!(target instanceof LivingEntity)) return;
         if (this.propertyConfiguration.bannedEntityTypes().contains(target.getType())) return;
 
-        Duration durationLeft = this.cooldownContainer.getCooldownLeft(player.getUniqueId()).orElse(null);
+        final Duration durationLeft = this.cooldownContainer.getCooldownLeft(player.getUniqueId()).orElse(null);
         if (durationLeft != null) {
             player.sendMessage(this.languageConfiguration.playerPickupCooldown(durationLeft));
             return;
         }
 
-        if (!(target instanceof Player)) {
+        if (!(target instanceof final Player targetPlayer)) {
             if (!this.permissionChecker.pickupEntity(player, target)) {
                 player.sendMessage(this.languageConfiguration.permissionMissing());
                 return;
             }
         } else {
-            Player targetPlayer = (Player) target;
             if (!this.permissionChecker.pickupPlayer(player, targetPlayer)) {
                 player.sendMessage(this.languageConfiguration.permissionMissing());
                 return;

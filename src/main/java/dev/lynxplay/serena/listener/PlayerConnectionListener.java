@@ -9,12 +9,12 @@ public class PlayerConnectionListener implements Listener {
 
     private final CooldownContainer cooldownContainer;
 
-    public PlayerConnectionListener(CooldownContainer cooldownContainer) {
+    public PlayerConnectionListener(final CooldownContainer cooldownContainer) {
         this.cooldownContainer = cooldownContainer;
     }
 
     @EventHandler
-    public void onDisconnect(PlayerQuitEvent event) {
+    public void onDisconnect(final PlayerQuitEvent event) {
         this.cooldownContainer.remove(event.getPlayer().getUniqueId());
     }
 

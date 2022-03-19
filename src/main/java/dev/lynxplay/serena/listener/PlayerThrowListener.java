@@ -14,21 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class PlayerThrowListener implements Listener {
-
-    private final PropertyConfiguration propertyConfiguration;
-    private final FixedScheduler scheduler;
-
-    public PlayerThrowListener(PropertyConfiguration propertyConfiguration, FixedScheduler scheduler) {
-        this.propertyConfiguration = propertyConfiguration;
-        this.scheduler = scheduler;
-    }
+public record PlayerThrowListener(
+    PropertyConfiguration propertyConfiguration,
+    FixedScheduler scheduler
+) implements Listener {
 
     @EventHandler
-    public void onEntityThrow(PlayerInteractEvent event) {
+    public void onEntityThrow(final PlayerInteractEvent event) {
         if (event.getAction() != Action.LEFT_CLICK_AIR) return;
 
-        Player player = event.getPlayer();
+        final Player player = event.getPlayer();
         final List<Entity> passengers = new ArrayList<>(player.getPassengers());
         final Set<EntityType> bannedEntityTypes = this.propertyConfiguration.bannedEntityTypes();
         passengers.removeIf(e -> bannedEntityTypes.contains(e.getType()));

@@ -7,19 +7,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-public class SerenaReloadCommand implements CommandExecutor {
-
-    private final PlayerPermissionChecker permissionChecker;
-    private final LanguageConfiguration languageConfiguration;
-    private final Reloadable reloadable;
-
-    public SerenaReloadCommand(PlayerPermissionChecker permissionChecker, LanguageConfiguration languageConfiguration
-        , Reloadable reloadable) {
-        this.permissionChecker = permissionChecker;
-        this.languageConfiguration = languageConfiguration;
-        this.reloadable = reloadable;
-    }
+public record SerenaReloadCommand(PlayerPermissionChecker permissionChecker,
+                                  LanguageConfiguration languageConfiguration,
+                                  Reloadable reloadable
+) implements CommandExecutor {
 
     /**
      * Executes the given command, returning its success.
@@ -35,13 +28,15 @@ public class SerenaReloadCommand implements CommandExecutor {
      * @return true if a valid command, otherwise false
      */
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)) {
+    public boolean onCommand(final @NotNull CommandSender sender,
+                             final @NotNull Command command,
+                             final @NotNull String label,
+                             final String[] args) {
+        if (!(sender instanceof final Player player)) {
             sender.sendMessage(this.languageConfiguration.prefix() + "Only players can use this command");
             return true;
         }
 
-        Player player = (Player) sender;
         if (!permissionChecker.useSerenaReloadCommand(player)) {
             player.sendMessage(this.languageConfiguration.permissionMissing());
             return true;

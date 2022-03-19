@@ -12,8 +12,9 @@ public class ImmutablePropertyConfiguration implements PropertyConfiguration {
     private final double throwVelocityMultiplier;
     private final Set<EntityType> bannedEntityTypes;
 
-    ImmutablePropertyConfiguration(Duration playerPickupCooldown, double throwVelocityMultiplier,
-                                   Set<EntityType> bannedEntityTypes) {
+    ImmutablePropertyConfiguration(final Duration playerPickupCooldown,
+                                   final double throwVelocityMultiplier,
+                                   final Set<EntityType> bannedEntityTypes) {
         this.playerPickupCooldown = playerPickupCooldown;
         this.throwVelocityMultiplier = throwVelocityMultiplier;
         this.bannedEntityTypes = bannedEntityTypes;

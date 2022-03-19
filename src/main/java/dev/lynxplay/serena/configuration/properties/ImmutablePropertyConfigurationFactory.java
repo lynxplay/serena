@@ -23,7 +23,7 @@ public class ImmutablePropertyConfigurationFactory implements ConfigurationFacto
      * @return the created instance
      */
     @Override
-    public PropertyConfiguration create(Configuration configuration) {
+    public PropertyConfiguration create(final Configuration configuration) {
         final Map<String, EntityType> keyList = Arrays.stream(EntityType.values())
             .filter(t -> t != EntityType.UNKNOWN)
             .collect(Collectors.toMap(t -> t.getKey().getKey(), Function.identity()));
