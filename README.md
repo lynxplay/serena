@@ -5,11 +5,11 @@ A hoggyback-like plugin for spigot.
 Installation
 =
 
-The plugin is based on the maven build tools, so you can easily install it using  
+The plugin is based on the gradle build, so you can easily build it using  
 ```bash
-mvn package
+./gradlew build
 ```
-The final output jar will be located in the `target` folder.
+The final output jar will be located in the `build/libs` folder.
 
 Commands
 ===
