@@ -72,8 +72,14 @@ public class Serena extends JavaPlugin implements Reloadable {
             propertyConfiguration.playerPickupCooldown().getSeconds()));
 
         HandlerList.unregisterAll(this);
-        registerListeners(this.cooldownContainer, languageConfiguration, this.playerToggleRegistry
-            , this.playerPermissionChecker, propertyConfiguration, fixedScheduler);
+        registerListeners(
+            this.cooldownContainer,
+            languageConfiguration,
+            this.playerToggleRegistry,
+            this.playerPermissionChecker,
+            propertyConfiguration,
+            fixedScheduler
+        );
 
         registerCommands(this.playerToggleRegistry, languageConfiguration, this.playerPermissionChecker);
     }
@@ -102,8 +108,7 @@ public class Serena extends JavaPlugin implements Reloadable {
             propertyConfiguration,
             Player::displayName
         ), this);
-        this.getServer().getPluginManager().registerEvents(new PlayerThrowListener(propertyConfiguration, scheduler),
-            this);
+        this.getServer().getPluginManager().registerEvents(new PlayerThrowListener(propertyConfiguration, scheduler), this);
         this.getServer().getPluginManager().registerEvents(new PlayerConnectionListener(cooldownContainer), this);
     }
 
