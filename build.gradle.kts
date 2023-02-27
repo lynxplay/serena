@@ -5,7 +5,7 @@ tasks.shadowJar { archiveClassifier.set("final") }
 
 plugins {
     java
-    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("com.github.johnrengelman.shadow") version "8.1.0"
 }
 
 repositories {
