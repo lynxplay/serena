@@ -1,5 +1,5 @@
 group = "dev.lynxplay"
-version = "1.0.8"
+version = "1.0.9-SNAPSHOT"
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 tasks.shadowJar { archiveClassifier.set("final") }
 
